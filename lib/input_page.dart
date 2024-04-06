@@ -8,7 +8,14 @@ import 'icon_content.dart';
 import 'reusable_card.dart';
 
 const bottomContainerWeight = 80.0;
-const color = Color(0xFF1D1E33);
+const activeCardColor = Color(0xFF1D1E33);
+const inactiveCardColor = Color(0xFF111328);
+const bottomCardColor = Color(0xFFEB1555);
+
+enum Gender {
+  male,
+  female,
+}
 
 class InputPage extends StatefulWidget {
   @override
@@ -16,17 +23,7 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-  Expanded buildBox() {
-    return Expanded(
-      child: Container(
-        margin: EdgeInsets.all(15.0),
-        decoration: BoxDecoration(
-          color: color,
-          borderRadius: BorderRadius.circular(10.0), //Bottom row
-        ),
-      ),
-    );
-  }
+   Gender? selectedGender;
 
   @override
   Widget build(BuildContext context) {
@@ -46,24 +43,42 @@ class _InputPageState extends State<InputPage> {
             children: [
               //TOP LAYER 1ST CONTAINER STARTING
               Expanded(
-                child: ReusableCard(
-                  colour: color,
-                  cardChild: IconCard(
-                    icon: FontAwesomeIcons.mars,
-                    label: 'MALE',
+                child: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      selectedGender = Gender.male;
+                    });
+                  },
+                  child: ReusableCard(
+                    colour: selectedGender == Gender.male
+                        ? activeCardColor
+                        : inactiveCardColor,
+                    cardChild: IconCard(
+                      icon: FontAwesomeIcons.mars,
+                      label: 'MALE',
+                    ),
                   ),
                 ),
               ),
               //TOP LAYER 1ST CONTAINER ENDED
               //TOP LAYER 2ND CONTAINER STARTING
               Expanded(
-                child: ReusableCard(
-                  colour: color,
-                  cardChild: IconCard(
-                    icon: FontAwesomeIcons.venus,
-                    label: 'FEMALE',
+                child: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      selectedGender = Gender.female;
+                    });
+                  },
+                  child: ReusableCard(
+                    colour: selectedGender == Gender.female
+                        ? activeCardColor
+                        : inactiveCardColor,
+                    cardChild: IconCard(
+                      icon: FontAwesomeIcons.venus,
+                      label: 'FEMALE',
+                    ),
                   ),
-                 ),
+                ),
               ),
               //TOP LAYER 2ND CONTAINER ENDED
             ],
@@ -73,7 +88,7 @@ class _InputPageState extends State<InputPage> {
         //MIDDLE CARD STARTING
         Expanded(
           child: ReusableCard(
-            colour: color,
+            colour: activeCardColor,
             // cardChild: Slider(value: 0, onChanged: onChanged),
           ),
         ),
@@ -86,13 +101,13 @@ class _InputPageState extends State<InputPage> {
               //BOTTOM ROW 1ST CONTAINER STARTING
               Expanded(
                 child: ReusableCard(
-                  colour: color,
+                  colour: activeCardColor,
                 ),
               ),
               //BOTTOM ROW FIRST CONTAINER ENDED AND SECOND STARTED
               Expanded(
                 child: ReusableCard(
-                  colour: color,
+                  colour: activeCardColor,
                 ),
               )
               //BOTTOM ROW 2ND CONTAINER ENDED
@@ -101,7 +116,7 @@ class _InputPageState extends State<InputPage> {
         ),
         //BOTTOM ROW ENDED
         Container(
-          color: Color(0xFFEB1555),
+          color: bottomCardColor,
           margin: EdgeInsets.only(top: 10.0),
           width: double.infinity,
           height: bottomContainerWeight,
@@ -110,5 +125,3 @@ class _InputPageState extends State<InputPage> {
     );
   }
 }
-
-
