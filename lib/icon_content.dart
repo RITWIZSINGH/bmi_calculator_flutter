@@ -1,11 +1,8 @@
 // ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'constants.dart';
 
-const labelTextStyle = TextStyle(
-              fontSize: 18.0,
-              color: Color(0xFF8D8E98),
-            );
 
 class IconCard extends StatelessWidget {
   const IconCard({this.icon, required this.label});
