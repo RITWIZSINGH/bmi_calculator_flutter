@@ -23,6 +23,8 @@ class InputPage extends StatefulWidget {
 class _InputPageState extends State<InputPage> {
   Gender? selectedGender;
   int height = 180;
+  int weight = 60;
+  int age = 18;
 
   @override
   Widget build(BuildContext context) {
@@ -104,17 +106,26 @@ class _InputPageState extends State<InputPage> {
                   ],
                 ),
                 //SLIDER WIDGET ADDED HERE
-                Slider(
-                    value: height.toDouble(),
-                    min: 120,
-                    max: 230,
-                    activeColor: Color(0xFFEB1555),
-                    inactiveColor: Color(0xFF8D8E98),
-                    onChanged: (double newValue) {
-                      setState(() {
-                        height = newValue.round();
-                      });
-                    })
+                SliderTheme(
+                  data: SliderTheme.of(context).copyWith(
+                      activeTrackColor: Colors.white,
+                      inactiveTrackColor: Color(0xFF8D8E98),
+                      thumbColor: Color(0xFFEB1555),
+                      overlayColor: Color(0x29EB1555),
+                      thumbShape:
+                          RoundSliderThumbShape(enabledThumbRadius: 15.0),
+                      overlayShape:
+                          RoundSliderOverlayShape(overlayRadius: 30.0)),
+                  child: Slider(
+                      value: height.toDouble(),
+                      min: 120,
+                      max: 230,
+                      onChanged: (double newValue) {
+                        setState(() {
+                          height = newValue.round();
+                        });
+                      }),
+                )
               ],
             ),
             colour: activeCardColor,
@@ -125,19 +136,108 @@ class _InputPageState extends State<InputPage> {
         //BOTTOM ROW STARTING HERE
         Expanded(
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               //BOTTOM ROW 1ST CONTAINER STARTING
               Expanded(
                 child: ReusableCard(
                   colour: activeCardColor,
+                  cardChild: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'WEIGHT(in KG)',
+                        style: labelTextStyle,
+                      ),
+                      //WEIGHT DISPLAYING
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            weight.toString(),
+                            style: kNumberTextLabel,
+                          ),
+                        ],
+                      ),
+                      //PLUS AND MINUS BUTTONS
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          RoundIconButton(
+                            icon: FontAwesomeIcons.minus,
+                            onPress: (){
+                              setState(() {
+                                weight--;
+                              });
+                            },
+                          ),
+                          SizedBox(
+                            width: 15.0,
+                          ),
+                          RoundIconButton(
+                            icon: FontAwesomeIcons.plus,
+                            onPress: (){
+                              setState(() {
+                                weight++;
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
               //BOTTOM ROW FIRST CONTAINER ENDED AND SECOND STARTED
               Expanded(
                 child: ReusableCard(
                   colour: activeCardColor,
+                  cardChild: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'AGE',
+                        style: labelTextStyle,
+                      ),
+                      //WEIGHT DISPLAYING
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            age.toString(),
+                            style: kNumberTextLabel,
+                          ),
+                        ],
+                      ),
+                      //PLUS AND MINUS BUTTONS
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          RoundIconButton(
+                            icon: FontAwesomeIcons.minus,
+                            onPress: (){
+                              setState(() {
+                                age--;
+                              });
+                            },
+                          ),
+                          SizedBox(
+                            width: 15.0,
+                          ),
+                          RoundIconButton(
+                            icon: FontAwesomeIcons.plus,
+                            onPress: (){
+                              setState(() {
+                                age++;
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-              )
+              ),
               //BOTTOM ROW 2ND CONTAINER ENDED
             ],
           ),
@@ -148,8 +248,34 @@ class _InputPageState extends State<InputPage> {
           margin: EdgeInsets.only(top: 10.0),
           width: double.infinity,
           height: bottomContainerWeight,
+          child: Center(
+            child: Text(
+              'CALCULATE',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 18.0,
+              ),
+            ),
+          ),
         )
       ]),
+    );
+  }
+}
+
+class RoundIconButton extends StatelessWidget {
+  RoundIconButton({required this.icon,required this.onPress});
+  final IconData icon;
+  final Function()? onPress;
+
+  @override
+  Widget build(BuildContext context) {
+    return RawMaterialButton(
+      child: Icon(icon),
+      onPressed: onPress,
+      constraints: const BoxConstraints(minWidth: 56.0, minHeight: 56.0),
+      fillColor: Color(0xFF4C4F5E),
+      shape: CircleBorder(),
     );
   }
 }
