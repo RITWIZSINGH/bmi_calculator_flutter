@@ -1,6 +1,4 @@
-// ignore_for_file: library_private_types_in_public_api, prefer_const_constructors, prefer_const_literals_to_create_immutables, use_key_in_widget_constructors, unnecessary_import, sort_child_properties_last, unused_import
-
-import 'dart:js_interop';
+// ignore_for_file: library_private_types_in_public_api, prefer_const_constructors, prefer_const_literals_to_create_immutables, use_key_in_widget_constructors, unnecessary_import, sort_child_properties_last, unused_import, prefer_const_constructors_in_immutables
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +8,8 @@ import 'icon_content.dart';
 import 'reusable_card.dart';
 import 'constants.dart';
 import 'results_page.dart';
+import 'bottombutton.dart';
+import 'package:bmi_calculator_flutter/roundIconButton.dart';
 
 enum Gender {
   male,
@@ -166,7 +166,7 @@ class _InputPageState extends State<InputPage> {
                         children: [
                           RoundIconButton(
                             icon: FontAwesomeIcons.minus,
-                            onPress: (){
+                            onPress: () {
                               setState(() {
                                 weight--;
                               });
@@ -177,7 +177,7 @@ class _InputPageState extends State<InputPage> {
                           ),
                           RoundIconButton(
                             icon: FontAwesomeIcons.plus,
-                            onPress: (){
+                            onPress: () {
                               setState(() {
                                 weight++;
                               });
@@ -216,7 +216,7 @@ class _InputPageState extends State<InputPage> {
                         children: [
                           RoundIconButton(
                             icon: FontAwesomeIcons.minus,
-                            onPress: (){
+                            onPress: () {
                               setState(() {
                                 age--;
                               });
@@ -227,7 +227,7 @@ class _InputPageState extends State<InputPage> {
                           ),
                           RoundIconButton(
                             icon: FontAwesomeIcons.plus,
-                            onPress: (){
+                            onPress: () {
                               setState(() {
                                 age++;
                               });
@@ -244,47 +244,21 @@ class _InputPageState extends State<InputPage> {
           ),
         ),
         //BOTTOM ROW ENDED
-        GestureDetector(
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context){
-              return ResultPage();
-            }
-            ),);
+
+        //CALCULATE BUTTON HERE
+        BottomButton(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) {
+                return ResultPage();
+              }),
+            );
           },
-          child: Container(
-            color: bottomCardColor,
-            margin: EdgeInsets.only(top: 10.0),
-            width: double.infinity,
-            height: bottomContainerWeight,
-            child: Center(
-              child: Text(
-                'CALCULATE',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18.0,
-                ),
-              ),
-            ),
-          ),
+          label: 'CALCULATE',
         )
       ]),
     );
   }
 }
 
-class RoundIconButton extends StatelessWidget {
-  RoundIconButton({required this.icon,required this.onPress});
-  final IconData icon;
-  final Function()? onPress;
-
-  @override
-  Widget build(BuildContext context) {
-    return RawMaterialButton(
-      child: Icon(icon),
-      onPressed: onPress,
-      constraints: const BoxConstraints(minWidth: 56.0, minHeight: 56.0),
-      fillColor: Color(0xFF4C4F5E),
-      shape: CircleBorder(),
-    );
-  }
-}
