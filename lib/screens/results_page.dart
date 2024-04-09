@@ -1,7 +1,8 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, sort_child_properties_last
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, sort_child_properties_last, unnecessary_import
 
+import 'package:bmi_calculator_flutter/components/bottombutton.dart';
 import 'package:bmi_calculator_flutter/constants.dart';
-import 'package:bmi_calculator_flutter/reusable_card.dart';
+import 'package:bmi_calculator_flutter/components/reusable_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -61,17 +62,11 @@ class ResultPage extends StatelessWidget {
           //MIDDLE CARD SHOWING BMI ENDS
 
           //RE-CALCULATE BUTTON
-          Container(
-            child: Center(
-              child: Text(
-                'RE-CALCULATE',
-                style: kLargeButtonTextStyle,
-              ),
-            ),
-            color: bottomCardColor,
-            width: double.infinity,
-            height: bottomContainerWeight,
-          )
+          BottomButton(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              label: 'RE-CALCULATE')
         ],
       ),
     );

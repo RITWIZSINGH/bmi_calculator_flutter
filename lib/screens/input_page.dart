@@ -4,12 +4,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'icon_content.dart';
-import 'reusable_card.dart';
-import 'constants.dart';
+import '../components/icon_content.dart';
+import '../components/reusable_card.dart';
+import '../constants.dart';
 import 'results_page.dart';
-import 'bottombutton.dart';
-import 'package:bmi_calculator_flutter/roundIconButton.dart';
+import '../components/bottombutton.dart';
+import 'package:bmi_calculator_flutter/components/roundIconButton.dart';
 
 enum Gender {
   male,
